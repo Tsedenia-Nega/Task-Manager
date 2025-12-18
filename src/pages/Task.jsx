@@ -53,19 +53,26 @@ const filteredTasks = tasks.filter(task=>{
 
 
 
-  return (
-    <div>
-      <h1>TO-DO List</h1>
-      <TaskForm addTask={addTask} />
-      <FilterTabs setFilter={setFilter} />
-      <TaskList
-        tasks={filteredTasks}
-        toggleTask={toggleTask}
-        deleteTask={deleteTask}
-        editTask={editTask}
-      />
-    </div>
-  );
+ return (
+   <div className="min-h-screen bg-gray-300 pt-4">
+     <div className="w-full max-w-3xl min-h-[500px] mx-auto  p-3 rounded-lg shadow-md bg-gray-200">
+       <div className="bg-teal-500 text-white text-center py-4 rounded-lg mb-6">
+         <h1 className="text-2xl font-semibold">Todo App</h1>
+       </div>
+
+       <TaskForm addTask={addTask} />
+       <FilterTabs filter={filter} setFilter={setFilter} />
+
+       <TaskList
+         tasks={filteredTasks}
+         toggleTask={toggleTask}
+         deleteTask={deleteTask}
+         editTask={editTask}
+       />
+     </div>
+   </div>
+ );
+
 }
 
 export default Task

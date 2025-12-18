@@ -2,7 +2,7 @@ import TaskItem from "./TaskItem";
 
 function TaskList({ tasks, toggleTask, deleteTask,editTask }) {
   if (tasks.length === 0) {
-    return <p>No tasks here 👌</p>;
+    return <p className="text-center font-bold">No tasks here </p>;
   }
 
   return (

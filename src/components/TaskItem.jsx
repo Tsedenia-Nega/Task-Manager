@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { IconButton, Checkbox, TextField } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CheckIcon from "@mui/icons-material/Check";
 
 function TaskItem({ task, toggleTask, deleteTask, editTask }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -11,43 +15,47 @@ function TaskItem({ task, toggleTask, deleteTask, editTask }) {
   };
 
   return (
-    <li>
+    <li className="flex items-center gap-2 p-2 border-b">
       {/* Checkbox */}
-      <input
-        type="checkbox"
+      <Checkbox
         checked={task.completed}
         onChange={() => toggleTask(task.id)}
+        color="primary"
       />
 
-      {/* VIEW MODE */}
-      {!isEditing && (
+      {/* Task Title or Edit Input */}
+      {!isEditing ? (
         <span
-          style={{
-            textDecoration:
-              task.completed && !isEditing ? "line-through" : "none",
-          }}
+          className={`flex-1 ${
+            task.completed ? "line-through text-gray-400" : ""
+          }`}
         >
           {task.title}
         </span>
-      )}
-
-      {/* EDIT MODE */}
-      {isEditing && (
-        <input
-          type="text"
+      ) : (
+        <TextField
           value={editTitle}
           onChange={(e) => setEditTitle(e.target.value)}
+          size="small"
+          fullWidth
         />
       )}
 
-      {/* BUTTONS */}
+      {/* Edit / Save Button */}
       {!isEditing ? (
-        <button onClick={() => setIsEditing(true)}>✏️</button>
+        <IconButton color="primary" onClick={() => setIsEditing(true)}>
+          <EditIcon />
+        </IconButton>
       ) : (
-        <button onClick={handleSave}>💾</button>
+        <IconButton color="success" onClick={handleSave}>
+          <CheckIcon />
+        </IconButton>
       )}
 
-      <button onClick={() => deleteTask(task.id)}>🗑️</button>
+      {/* Delete Button */}
+      <IconButton color="error" onClick={() => deleteTask(task.id)}>
+        <DeleteIcon />
+      </IconButton>
     </li>
   );
 }
